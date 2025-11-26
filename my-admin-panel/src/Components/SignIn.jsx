@@ -4,6 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTitle } from "../Hooks/useTitle";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { toPersian } from "../Hooks/authMessages"; 
 import styles from "./SignIn.module.css";
 
 const initialState = {
@@ -34,11 +35,10 @@ function reducer(state, action) {
 function SignIn() {
   useTitle("Sign In");
   const navigate = useNavigate();
-
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const goToRegister = () => {
-    navigate("/sign-in");
+    navigate("/register"); 
   };
 
   const handleChange = (e) => {
@@ -67,7 +67,7 @@ function SignIn() {
       const data = await response.json();
 
       if (!response.ok) {
-        toast.error(data.message || "ورود با خطا مواجه شد.");
+        toast.error(toPersian(data.message)); 
         return;
       }
 
@@ -77,10 +77,10 @@ function SignIn() {
 
       toast.success("ورود موفقیت‌آمیز بود!");
       dispatch({ type: "RESET" });
-
       setTimeout(() => navigate("/products"), 1500);
+
     } catch (error) {
-      toast.error("ارتباط با سرور برقرار نشد.");
+      toast.error(toPersian(error.message));
       console.error(error);
     }
   };

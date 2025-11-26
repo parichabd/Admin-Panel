@@ -1,10 +1,12 @@
 import { useReducer } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useTitle } from "../Hooks/useTitle";
-import styles from "./LoginPage.module.css";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { toPersian } from "../Hooks/authMessages";
+
+import "react-toastify/dist/ReactToastify.css";
+import styles from "./LoginPage.module.css";
 
 const initialState = {
   username: "",
@@ -103,9 +105,9 @@ function RegisterPage() {
       const registerData = await registerResponse.json();
 
       if (!registerResponse.ok) {
-        toast.error(registerData.message || "ثبت نام با خطا مواجه شد.");
+        toast.error(toPersian(registerData.message) || "ثبت نام با خطا مواجه شد.");
 
-        if (registerData.message === "User already exists") {
+        if (registerData.message === "Username already exists") {
           setTimeout(() => {
             navigate("/sign-in");
           }, 1500);
@@ -126,7 +128,7 @@ function RegisterPage() {
       const loginData = await loginResponse.json();
 
       if (!loginResponse.ok) {
-        toast.error(loginData.message || "ورود خودکار با خطا مواجه شد.");
+        toast.error(toPersian(loginData.message) || "ورود خودکار با خطا مواجه شد.");
         return;
       }
 
