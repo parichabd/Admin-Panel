@@ -83,34 +83,35 @@
   width: 18px;
   opacity: 0.6;
 }
-
 .userBox {
   position: relative;
   cursor: pointer;
+  border-radius: 16px 0 0 16px;
+  overflow: hidden;
 }
 
 .userBox::after {
   content: "تکمیل اطلاعات";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(3, 59, 115, 0.868);
-  color: white;
+  inset: 0;
+  background-color: rgba(85, 162, 240, 0.868);
+  color: #000;
   font-weight: 600;
   font-size: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 16px 0 0 16px;
+
+  transform: translateX(-100%);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
   z-index: 10;
 }
 
 .userBox:hover::after {
+  transform: translateX(0);
   opacity: 1;
   pointer-events: auto;
 }
