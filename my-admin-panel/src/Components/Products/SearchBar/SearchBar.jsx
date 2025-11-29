@@ -1,6 +1,6 @@
+// SearchBar.jsx
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import { CiSearch } from "react-icons/ci";
 import { useTitle } from "../../../Hooks/useTitle";
 import { UserContext } from "../../../context/UserProvider";
@@ -22,8 +22,6 @@ function SearchBar({ onSearch = () => {} }) {
 
   return (
     <div className={styles.wrapper}>
-      <ToastContainer position="top-right" autoClose={3000} />
-
       <div className={styles.searchBox}>
         <span className={styles.icon}>
           <CiSearch size={28} color={"#282828c6"} />

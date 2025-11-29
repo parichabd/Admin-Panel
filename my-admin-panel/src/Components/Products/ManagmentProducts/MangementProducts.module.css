@@ -103,12 +103,8 @@
     rgba(255, 255, 255, 0.25),
     transparent
   );
-  transition: 0.6s;
 }
 
-.modalButtons button:hover::before {
-  left: 100%;
-}
 .Managment {
   display: flex;
   gap: 15px;
@@ -141,10 +137,13 @@
   position: relative;
   overflow: hidden;
   transition: all 0.35s ease;
+  box-shadow: 0 4px 15px rgba(85, 163, 240, 0.3);
 }
 
 .button button:hover {
   background-color: #3d8ee0;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(85, 163, 240, 0.45);
 }
 
 .button button::before {
@@ -157,14 +156,16 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.4),
     transparent
   );
-  transition: 0.6s;
+  transform: skewX(-25deg);
+  transition: 0s;
 }
 
 .button button:hover::before {
   left: 100%;
+  transition: left 0.75s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .errorText {

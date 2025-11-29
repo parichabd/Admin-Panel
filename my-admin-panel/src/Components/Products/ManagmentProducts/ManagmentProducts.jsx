@@ -3,6 +3,8 @@ import { useTitle } from "../../../Hooks/useTitle";
 import { useState } from "react";
 import styles from "./MangementProducts.module.css";
 
+
+
 function AddProductModal({ onClose, onAdd }) {
   const [formData, setFormData] = useState({
     name: "",
