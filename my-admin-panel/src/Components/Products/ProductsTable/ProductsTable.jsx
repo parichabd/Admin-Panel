@@ -24,8 +24,8 @@ function ProductsTable({ products }) {
               <td>{product.price}</td>
               <td>{product.id}</td>
               <td>
-                <img src={trashs} alt="سطل آشغال" />
                 <img src={edit} alt="ویرایش" />
+                <img src={trashs} alt="سطل آشغال" />
               </td>
             </tr>
           ))}

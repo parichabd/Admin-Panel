@@ -1,60 +1,71 @@
-.modalBackdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0,0,0,0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modalContent {
-  background-color: #fff;
-  padding: 1.5rem;
-  border-radius: 10px;
-  width: 320px;
-  max-width: 90%;
-}
-
-.modalContent h2 {
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
-.modalContent form div {
-  margin-bottom: 1rem;
-}
-
-.modalContent label {
-  display: block;
-  margin-bottom: 0.3rem;
-  font-weight: bold;
-}
-
-.modalContent input {
+.TableProducts {
   width: 100%;
-  padding: 0.4rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  max-width: 1340px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  font-size: 14px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  min-height: 260px;
+  font-weight: 500;
 }
 
-.modalContent button {
-  margin-right: 10px;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
+.TableProducts thead {
+  height: 70px;
+  background-color: #f2f2f2;
+  color: #000;
+  font-size: 12px;
 }
 
-.modalContent button[type="submit"] {
-  background-color: #55A3F0;
-  color: #fff;
+.TableProducts th {
+  padding: 8px 4px;
+  font-weight: 600;
 }
 
-.modalContent button[type="button"] {
-  background-color: #ccc;
+.TableProducts td {
+  padding: 12px 16px;
+  font-size: 12px;
   color: #333;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.TableProducts tbody tr:hover {
+  background-color: rgba(85, 163, 240, 0.07);
+}
+
+.TableProducts tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.TableProducts td:last-child {
+  width: 110px;
+  padding: 12px 20px;
+  position: relative;
+}
+
+.TableProducts .actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.4);
+}
+
+.TableProducts tbody tr:hover .actions {
+  transform: translateX(-80px);
+}
+
+.TableProducts img {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  margin: 0 6px;
+}
+
+.TableProducts img:hover {
+  opacity: 1.1;
+  transform: scale(1.35) translateY(-4px) rotate(6deg);
 }

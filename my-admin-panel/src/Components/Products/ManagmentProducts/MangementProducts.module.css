@@ -68,7 +68,6 @@
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* دکمه آبی (ثبت / تأیید) */
 .modalButtons button[type="submit"] {
   background-color: #55a3f0;
   color: white;

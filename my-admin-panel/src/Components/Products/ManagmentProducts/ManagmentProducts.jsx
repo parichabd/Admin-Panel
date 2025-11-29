@@ -17,7 +17,6 @@ function AddProductModal({ onClose, onAdd }) {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // پاک کردن خطای همان فیلد هنگام تایپ
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
