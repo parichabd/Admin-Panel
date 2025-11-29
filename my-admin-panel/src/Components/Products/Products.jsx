@@ -2,29 +2,51 @@ import { useState, useEffect } from "react";
 import SearchBar from "./SearchBar/SearchBar";
 import ManagmentProducts from "./ManagmentProducts/ManagmentProducts";
 import ProductsTable from "./ProductsTable/ProductsTable";
-
-import ConfirmDialog from "./ManagmentProducts//ConfirmDialog";
+import ConfirmDialog from "./ManagmentProducts/ConfirmDialog";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import styles from "./Products.module.css";
 
 function Products() {
   const [products, setProducts] = useState([]);
-
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [productToDelete, setProductToDelete] = useState(null);
 
+
   useEffect(() => {
-    fetch("http://localhost:3000/products")
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data.data || data);
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error("خطا در دریافت محصولات");
-      });
+    const loadProducts = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/products", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        });
+
+        if (!res.ok) {
+          console.error("خطای سرور:", res.status);
+          setProducts([]);
+          toast.error("خطا در دریافت محصولات");
+          return;
+        }
+
+        const data = await res.json();
+        const productList = Array.isArray(data) ? data : data.data || [];
+
+        if (!Array.isArray(productList)) {
+          console.warn("داده دریافتی آرایه نیست:", data);
+          setProducts([]);
+          return;
+        }
+
+        setProducts(productList);
+      } catch (err) {
+        console.error("خطا در fetch:", err);
+        setProducts([]);
+        toast.error("خطا در بارگذاری محصولات");
+      }
+    };
+
+    loadProducts();
   }, []);
 
   const handleAddProduct = async (newProduct) => {

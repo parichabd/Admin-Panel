@@ -1,7 +1,6 @@
 import { useState } from "react";
 import trashs from "../../../assets/icons/trash.png";
 import edit from "../../../assets/icons/edit.png";
-
 import styles from "./ProductsTable.module.css";
 
 function EditModal({ product, onClose, onSave }) {
@@ -118,26 +117,52 @@ function ProductsTable({ products = [], onEdit, onDelete }) {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
-            <tr key={product.id}>
-              <td>{product.name}</td>
-              <td>{product.quantity}</td>
-              <td>{Number(product.price).toFixed(2)}</td>
-              <td>{product.id}</td>
-              <td className={styles.actions}>
-                <img
-                  src={edit}
-                  alt="ویرایش"
-                  onClick={() => openEdit(product)}
-                />
-                <img
-                  src={trashs}
-                  alt="سطل آشغال"
-                  onClick={() => onDelete(product.id)}
-                />
+          {Array.isArray(products) ? (
+            products.length > 0 ? (
+              products.map((product) => (
+                <tr key={product.id}>
+                  <td>{product.name}</td>
+                  <td>{product.quantity}</td>
+                  <td>{Number(product.price).toFixed(2)}</td>
+                  <td>{product.id}</td>
+                  <td className={styles.actions}>
+                    <img
+                      src={edit}
+                      alt="ویرایش"
+                      onClick={() => openEdit(product)}
+                    />
+                    <img
+                      src={trashs}
+                      alt="سطل آشغال"
+                      onClick={() => onDelete(product.id)}
+                    />
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td
+                  colSpan="5"
+                  style={{
+                    textAlign: "center",
+                    padding: "50px",
+                    color: "#999",
+                  }}
+                >
+                  محصولی یافت نشد
+                </td>
+              </tr>
+            )
+          ) : (
+            <tr>
+              <td
+                colSpan="5"
+                style={{ textAlign: "center", padding: "50px", color: "#aaa" }}
+              >
+                در حال بارگذاری...
               </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
 
