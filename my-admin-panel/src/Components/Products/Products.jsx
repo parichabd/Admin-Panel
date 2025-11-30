@@ -9,9 +9,11 @@ import styles from "./Products.module.css";
 
 function Products() {
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]); // محصولات فیلتر شده
+  const [searchTerm, setSearchTerm] = useState(""); // متن جستجو
+
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [productToDelete, setProductToDelete] = useState(null);
-
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -39,6 +41,7 @@ function Products() {
         }
 
         setProducts(productList);
+        setFilteredProducts(productList); // مقدار اولیه برابر همه محصولات
       } catch (err) {
         console.error("خطا در fetch:", err);
         setProducts([]);
@@ -48,6 +51,27 @@ function Products() {
 
     loadProducts();
   }, []);
+
+  // فیلتر کردن محصولات بر اساس جستجو
+  useEffect(() => {
+    if (!searchTerm.trim()) {
+      setFilteredProducts(products);
+    } else {
+      const lowerSearch = searchTerm.trim().toLowerCase();
+      setFilteredProducts(
+        products.filter((product) =>
+          product.name.toLowerCase().includes(lowerSearch)
+        )
+      );
+    }
+  }, [searchTerm, products]);
+
+  // هندلر تغییر مقدار جستجو از SearchBar
+  const handleSearch = (text) => {
+    setSearchTerm(text);
+  };
+
+  // سایر توابع اضافه کردن، ویرایش، حذف و ... بدون تغییر
 
   const handleAddProduct = async (newProduct) => {
     try {
@@ -128,10 +152,13 @@ function Products() {
 
   return (
     <div className={styles.products}>
-      <SearchBar />
+      {/* حالا به SearchBar مقدار هندلر را می‌دهیم */}
+      <SearchBar onSearch={handleSearch} />
       <ManagmentProducts onAdd={handleAddProduct} />
+
+      {/* بجای products از filteredProducts استفاده می‌کنیم */}
       <ProductsTable
-        products={products}
+        products={filteredProducts}
         onEdit={handleEditProduct}
         onDelete={openConfirmDialog}
       />
